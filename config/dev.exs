@@ -42,6 +42,8 @@ config :git_issues, GitIssuesWeb.Endpoint,
 # Enable dev routes for dashboard and mailbox
 config :git_issues, dev_routes: true
 
+config :git_issues, :github, base_url: "https://api.github.com"
+
 # Do not include metadata nor timestamps in development logs
 config :logger, :console, format: "[$level] $message\n"
 
