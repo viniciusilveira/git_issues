@@ -16,7 +16,8 @@ defmodule GitIssues.Application do
       # Start a worker by calling: GitIssues.Worker.start_link(arg)
       # {GitIssues.Worker, arg},
       # Start to serve requests, typically the last entry
-      GitIssuesWeb.Endpoint
+      GitIssuesWeb.Endpoint,
+      GitIssues.InitETS
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

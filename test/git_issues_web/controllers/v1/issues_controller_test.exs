@@ -1,5 +1,5 @@
 defmodule GitIssues.V1.IssuesControllerTest do
-  use GitIssuesWeb.ConnCase, async: true
+  use GitIssuesWeb.ConnCase
 
   describe "GET /git-issues/api/v1/issues?username=&repo=" do
     test " with success", %{conn: conn} do

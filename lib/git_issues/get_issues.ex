@@ -19,13 +19,16 @@ defmodule GitIssues.GetIssues do
   def call(username, repo) do
     with {:ok, issues} <- Issues.get(username, repo),
          {:ok, contributors} = Contributors.get(username, repo) do
-      {:ok,
-       %{
-         user: username,
-         repository: repo,
-         issues: issues,
-         contributors: Enum.map(contributors, &{get_user(elem(&1, 0)), elem(&1, 0), elem(&1, 1)})
-       }}
+      issues = %{
+        user: username,
+        repository: repo,
+        issues: issues,
+        contributors: Enum.map(contributors, &{get_user(elem(&1, 0)), elem(&1, 0), elem(&1, 1)})
+      }
+
+      true = :ets.insert(:issues, {DateTime.utc_now(), issues})
+
+      {:ok, issues}
     end
   end
 

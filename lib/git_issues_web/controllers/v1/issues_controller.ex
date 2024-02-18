@@ -4,7 +4,7 @@ defmodule GitIssuesWeb.V1.IssuesController do
   alias GitIssues.GetIssues
 
   def collect(conn, %{"username" => username, "repo" => repo}) do
-    with {:ok, _issues} <- GetIssues.call(username, repo) do
+    with {:ok, _} <- Task.start(fn -> GetIssues.call(username, repo) end) do
       send_resp(conn, 204, "")
     end
   end
