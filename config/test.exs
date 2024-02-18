@@ -10,6 +10,11 @@ config :git_issues, GitIssuesWeb.Endpoint,
 # In test we don't send emails.
 config :git_issues, GitIssues.Mailer, adapter: Swoosh.Adapters.Test
 
+config :git_issues, :github,
+  client: GitIssues.Mock.Github.Client,
+  base_url: "https://api.github.com",
+  api_key: "ghp_XXX"
+
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
 
