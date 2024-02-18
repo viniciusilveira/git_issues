@@ -14,7 +14,7 @@ defmodule GitIssues.Contributors do
   @spec get(String.t(), String.t()) ::
           {:ok, list({String.t(), String.t(), String.t()})} | {:error, String.t()}
   def get(username, repo) do
-    github_api().get("/repos/#{username}/#{repo}/contributors")
+    github_client().get("/repos/#{username}/#{repo}/contributors")
     |> handle_response()
   end
 
@@ -35,5 +35,5 @@ defmodule GitIssues.Contributors do
     process_contributors(rest, result)
   end
 
-  defp github_api, do: Application.get_env(:git_issues, :github)[:api]
+  defp github_client, do: Application.get_env(:git_issues, :github)[:client]
 end

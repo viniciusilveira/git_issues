@@ -14,7 +14,7 @@ defmodule GitIssues.Users do
   @spec get(String.t()) ::
           {:ok, String.t()} | {:error, String.t()}
   def get(username) do
-    github_api().get("/users/#{username}")
+    github_client().get("/users/#{username}")
     |> handle_response()
   end
 
@@ -27,5 +27,5 @@ defmodule GitIssues.Users do
 
   defp handle_response({:error, %{reason: reason}}), do: {:error, reason}
 
-  defp github_api, do: Application.get_env(:git_issues, :github)[:api]
+  defp github_client, do: Application.get_env(:git_issues, :github)[:client]
 end

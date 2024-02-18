@@ -1,35 +1,34 @@
-defmodule GitIssues.Github.ApiTest do
+defmodule GitIssues.Github.ClientTest do
   use GitIssuesWeb.ConnCase, async: true
 
-  alias GitIssues.Github.Api
+  alias GitIssues.Github.Client
 
   describe "process_response_body/1" do
     test "when body is valid, it returns the parsed body" do
       body = "{\"body\": \"body\"}"
-      assert Api.process_response_body(body) == %{"body" => "body"}
+      assert Client.process_response_body(body) == %{"body" => "body"}
     end
   end
 
   describe "process_request_body/1" do
     test "when body is valid, return body parsed" do
       body = %{"body" => "body"}
-      assert Api.process_request_body(body) == "{\"body\":\"body\"}"
+      assert Client.process_request_body(body) == "{\"body\":\"body\"}"
     end
 
     test "when an empty body is valid, return body parsed" do
-      assert Api.process_request_body("") == ""
+      assert Client.process_request_body("") == ""
     end
 
     test "when body is nil, return body parsed" do
-      assert Api.process_request_body(nil) == ""
+      assert Client.process_request_body(nil) == ""
     end
   end
 
   describe "process_request_url/1" do
     test "when url is valid, return url with api address" do
       url = "/url"
-      IO.puts(base_url())
-      assert Api.process_request_url(url) == base_url() <> url
+      assert Client.process_request_url(url) == base_url() <> url
     end
   end
 
@@ -37,7 +36,7 @@ defmodule GitIssues.Github.ApiTest do
     test "when headers is valid, return headers with api headers" do
       headers = [{"header", "header"}]
 
-      assert Api.process_request_headers(headers) == api_headers() ++ headers
+      assert Client.process_request_headers(headers) == api_headers() ++ headers
     end
   end
 

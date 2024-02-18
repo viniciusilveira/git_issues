@@ -1,4 +1,4 @@
-defmodule GitIssues.Mock.Github.Api do
+defmodule GitIssues.Mock.Github.Client do
   @moduledoc false
 
   use GitIssues.Services, :behaviour

@@ -1,4 +1,4 @@
-defmodule GitIssues.Github.Api do
+defmodule GitIssues.Github.Client do
   @moduledoc """
   Serviço responsável pela comunicação com API do  github
   """
