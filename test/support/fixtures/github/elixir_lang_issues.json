@@ -30,7 +30,7 @@
             "type": "User",
             "site_admin": false
         },
-        "labels": [],
+        "labels": ["improvement", "needs discussion"],
         "state": "open",
         "locked": false,
         "assignee": null,
