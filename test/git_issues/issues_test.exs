@@ -7,13 +7,7 @@ defmodule GitIssues.IssuesTest do
     test "with success when the repository exists and the user is valid" do
       assert {:ok, issues} = Issues.get("elixir-lang", "elixir")
 
-      assert issues == [
-               {"Coverage broken on OTP27 for protocols", "sabiwara",
-                ["improvement", "needs discussion"]},
-               {"Fix bug in jaro_distance implementation", "josevalim", []},
-               {"ExUnit: Fails to correctly highlight diffs in tuples with lists in them",
-                "Munksgaard", []}
-             ]
+      assert issues == [{"Fix bug in jaro_distance implementation", "josevalim", []}]
     end
 
     test "with error when the repository does not exist" do

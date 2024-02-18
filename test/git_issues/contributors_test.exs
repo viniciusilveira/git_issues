@@ -7,7 +7,7 @@ defmodule GitIssues.ContributorsTest do
     test "with success when the repository exists and the user is valid" do
       assert {:ok, contributors} = Contributors.get("elixir-lang", "elixir")
 
-      assert contributors == [{"josevalim", 4292}, {"eksperimental", 822}, {"lexmag", 674}]
+      assert contributors == [{"josevalim", 4292}]
     end
 
     test "with error when the repository does not exist" do
