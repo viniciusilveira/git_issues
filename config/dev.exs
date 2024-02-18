@@ -43,7 +43,7 @@ config :git_issues, GitIssuesWeb.Endpoint,
 config :git_issues, dev_routes: true
 
 config :git_issues, :github,
-  api: GitIssues.Github.Api,
+  client: GitIssues.Github.Client,
   base_url: "https://api.github.com",
   api_key: "ghp_XXX"
 

@@ -50,6 +50,11 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
+  config :git_issues, :github,
+    client: GitIssues.Github.Client,
+    base_url: "https://api.github.com",
+    api_key: System.get_env("GITHUB_TOKEN") || "ghp_XXX"
+
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key
