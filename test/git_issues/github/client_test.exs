@@ -42,7 +42,7 @@ defmodule GitIssues.Github.ClientTest do
 
   defp api_headers do
     [
-      {"access_token", api_key()},
+      {"authorization", "Bearer " <> api_key()},
       {"Content-Type", "application/json"}
     ]
   end

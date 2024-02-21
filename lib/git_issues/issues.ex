@@ -3,6 +3,8 @@ defmodule GitIssues.Issues do
   This module provides functions to interact with GitHub issues.
   """
 
+  require Logger
+
   @doc """
   Get a list of issues for a given repository.
 
@@ -14,6 +16,8 @@ defmodule GitIssues.Issues do
   @spec get(String.t(), String.t()) ::
           {:ok, list({String.t(), String.t(), String.t()})} | {:error, String.t()}
   def get(username, repo) do
+    Logger.info("Fetching issues for #{username}/#{repo}")
+
     github_client().get("/repos/#{username}/#{repo}/issues")
     |> handle_response()
   end
@@ -31,7 +35,10 @@ defmodule GitIssues.Issues do
   defp process_issues([], result), do: {:ok, result}
 
   defp process_issues([issue | rest], result) do
-    result = result ++ [{issue["title"], issue["user"]["login"], issue["labels"]}]
+    result =
+      result ++
+        [%{title: issue["title"], username: issue["user"]["login"], labels: issue["labels"]}]
+
     process_issues(rest, result)
   end
 

@@ -1,19 +1,32 @@
 defmodule GitIssues.GetIssuesTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   alias GitIssues.GetIssues
 
-  describe "get_issues" do
-    test "with success" do
+  describe "call/2" do
+    setup do
       :ets.delete_all_objects(:issues)
+      on_exit(fn -> :ets.delete_all_objects(:issues) end)
+
+      %{}
+    end
+
+    test "with success" do
       assert {:ok, result} = GetIssues.call("elixir-lang", "elixir")
 
-      assert result == %{
-               user: "elixir-lang",
+      assert %{
+               contributors: [%{contributions: 4292, username: "josevalim", namme: "José Valim"}],
+               created_at: _,
+               issues: [
+                 %{
+                   labels: [],
+                   title: "Fix bug in jaro_distance implementation",
+                   username: "josevalim"
+                 }
+               ],
                repository: "elixir",
-               issues: [{"Fix bug in jaro_distance implementation", "josevalim", []}],
-               contributors: [{"José Valim", "josevalim", 4292}]
-             }
+               user: "elixir-lang"
+             } = result
 
       [{_, issue}] = :ets.tab2list(:issues)
 

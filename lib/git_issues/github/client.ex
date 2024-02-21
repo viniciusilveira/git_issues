@@ -5,7 +5,8 @@ defmodule GitIssues.Github.Client do
   use GitIssues.Services, :behaviour
 
   @impl true
-  def default_headers, do: [{"access_token", api_key()}, {"Content-Type", "application/json"}]
+  def default_headers,
+    do: [{"authorization", "Bearer " <> api_key()}, {"Content-Type", "application/json"}]
 
   @impl true
   def base_url, do: Application.get_env(:git_issues, :github)[:base_url]

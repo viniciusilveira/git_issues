@@ -1,7 +1,13 @@
 defmodule GitIssues.V1.IssuesControllerTest do
-  use GitIssuesWeb.ConnCase
+  use GitIssuesWeb.ConnCase, async: true
 
   describe "GET /git-issues/api/v1/issues?username=&repo=" do
+    setup %{conn: conn} do
+      :ets.delete_all_objects(:issues)
+      on_exit(fn -> :ets.delete_all_objects(:issues) end)
+      {:ok, conn: conn}
+    end
+
     test " with success", %{conn: conn} do
       conn = get(conn, "/git-issues/api/v1/issues?username=elixir-lang&repo=elixir")
 
