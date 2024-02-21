@@ -17,7 +17,8 @@ defmodule GitIssues.Application do
       # {GitIssues.Worker, arg},
       # Start to serve requests, typically the last entry
       GitIssuesWeb.Endpoint,
-      GitIssues.InitETS
+      GitIssues.InitETS,
+      GitIssues.Scheduler
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
