@@ -49,7 +49,7 @@ defmodule GitIssues.Mock.Github.Client do
     {:ok, %{status_code: 404, body: body}}
   end
 
-  def get("/users/elixir-lang") do
+  def get("/users/josevalim") do
     {:ok,
      %{
        status_code: 200,

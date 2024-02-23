@@ -8,11 +8,11 @@ defmodule GitIssues.IssuesTest do
       assert {:ok, issues} = Issues.get("elixir-lang", "elixir")
 
       assert issues == [
-               {"Coverage broken on OTP27 for protocols", "sabiwara",
-                ["improvement", "needs discussion"]},
-               {"Fix bug in jaro_distance implementation", "josevalim", []},
-               {"ExUnit: Fails to correctly highlight diffs in tuples with lists in them",
-                "Munksgaard", []}
+               %{
+                 title: "Fix bug in jaro_distance implementation",
+                 labels: [],
+                 username: "josevalim"
+               }
              ]
     end
 

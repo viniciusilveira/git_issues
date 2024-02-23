@@ -13,7 +13,9 @@ config :git_issues, GitIssues.Mailer, adapter: Swoosh.Adapters.Test
 config :git_issues, :github,
   client: GitIssues.Mock.Github.Client,
   base_url: "https://api.github.com",
-  api_key: "ghp_XXX"
+  api_key: "ghp_xYx",
+  webhook: "https://webhook.site/",
+  delay: 24
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false

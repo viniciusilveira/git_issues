@@ -41,7 +41,9 @@ defmodule GitIssues.MixProject do
       {:jason, "~> 1.2"},
       {:dns_cluster, "~> 0.1.1"},
       {:bandit, "~> 1.2"},
-      {:httpoison, "~> 2.0"}
+      {:httpoison, "~> 2.0"},
+      {:quantum, "~> 3.0"},
+      {:elixir_uuid, "~> 1.2"}
     ]
   end
 

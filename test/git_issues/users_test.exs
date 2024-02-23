@@ -5,9 +5,9 @@ defmodule GitIssues.UsersTest do
 
   describe "get/2" do
     test "with success when the repository exists and the user is valid" do
-      assert {:ok, user} = Users.get("elixir-lang")
+      assert {:ok, user} = Users.get("josevalim")
 
-      assert user == "The Elixir programming language"
+      assert user == "José Valim"
     end
 
     test "with error when the repository does not exist" do

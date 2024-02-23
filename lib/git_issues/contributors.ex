@@ -3,6 +3,8 @@ defmodule GitIssues.Contributors do
   This module provides functions to interact with GitHub contributors.
   """
 
+  require Logger
+
   @doc """
   Get a list of contributors for a given repository.
 
@@ -14,6 +16,8 @@ defmodule GitIssues.Contributors do
   @spec get(String.t(), String.t()) ::
           {:ok, list({String.t(), String.t(), String.t()})} | {:error, String.t()}
   def get(username, repo) do
+    Logger.info("Fetching contributors for #{username}/#{repo}")
+
     github_client().get("/repos/#{username}/#{repo}/contributors")
     |> handle_response()
   end
@@ -31,7 +35,9 @@ defmodule GitIssues.Contributors do
   defp process_contributors([], result), do: {:ok, result}
 
   defp process_contributors([contributor | rest], result) do
-    result = result ++ [{contributor["login"], contributor["contributions"]}]
+    result =
+      result ++ [%{username: contributor["login"], contributions: contributor["contributions"]}]
+
     process_contributors(rest, result)
   end
 
