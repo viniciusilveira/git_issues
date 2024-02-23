@@ -21,7 +21,7 @@ defmodule GitIssues.SendIssuesToWebhook do
     |> Enum.each(fn {id, issue} ->
       if DateTime.diff(DateTime.utc_now(), issue.created_at, :hour) == delay_to_send_issue() do
         Logger.info("Issue #{id} created at #{issue.created_at} is ready to be sent to webhook")
-        send_issue(issue)
+        spawn(fn -> send_issue(issue) end)
         :ets.delete(:issues, id)
       end
     end)
@@ -35,10 +35,11 @@ defmodule GitIssues.SendIssuesToWebhook do
     body = Jason.encode!(issue)
 
     webhook_url()
-    |> HTTPoison.post!(body, [])
+    |> webhook_client().post!(body, [])
   end
 
   defp delay_to_send_issue, do: Application.get_env(:git_issues, :github)[:delay]
 
   defp webhook_url, do: Application.get_env(:git_issues, :github)[:webhook_url]
+  defp webhook_client, do: Application.get_env(:git_issues, :github)[:webhook_client]
 end

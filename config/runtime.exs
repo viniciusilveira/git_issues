@@ -52,8 +52,11 @@ if config_env() == :prod do
 
   config :git_issues, :github,
     client: GitIssues.Github.Client,
-    base_url: "https://api.github.com",
-    api_key: System.get_env("GITHUB_TOKEN") || "ghp_XXX"
+    webhook_client: GitIssues.Github.WebhookClient,
+    base_url: System.get_env("GITHUB_API_URL") || "https://api.github.com",
+    api_key: System.get_env("GITHUB_API_KEY") || raise("GITHUB_API_KEY is missing"),
+    webhook: "https://webhook.site/",
+    delay: 24
 
   # ## SSL Support
   #
