@@ -40,7 +40,7 @@ config :phoenix, :json_library, Jason
 
 config :git_issues, GitIssues.Scheduler,
   jobs: [
-    {"*/2 * * * *", {GitIssues.SendIssuesToWebhook, :call, []}}
+    {"0 * * * *", {GitIssues.SendIssuesToWebhook, :call, []}}
   ]
 
 # Import environment specific config. This must remain at the bottom
