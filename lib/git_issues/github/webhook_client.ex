@@ -9,8 +9,6 @@ defmodule GitIssues.Github.WebhookClient do
     do: [{"Content-Type", "application/json"}]
 
   @impl true
-  def base_url, do: Application.get_env(:git_issues, :github)[:webhook_url]
 
-  @impl true
-  def process_response_body(body), do: Jason.decode!(body)
+  def process_response_body(body) when is_binary(body), do: body
 end

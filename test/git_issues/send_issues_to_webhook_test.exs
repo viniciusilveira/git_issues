@@ -1,11 +1,6 @@
 defmodule GitIssues.SendIssuesToWebhookTest do
   use ExUnit.Case, async: false
 
-  setup do
-    Application.put_env(:git_issues, :github, %{webhook_url: "http://example.com", delay: 24})
-    :ok
-  end
-
   test "sends issues to webhook" do
     issue_created_at =
       DateTime.utc_now()
