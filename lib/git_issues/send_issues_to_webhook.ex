@@ -32,13 +32,14 @@ defmodule GitIssues.SendIssuesToWebhook do
   defp send_issue(issue) do
     IO.puts("Sending issue to webhook ")
 
-    body = Jason.encode!(issue)
-
     webhook_url()
-    |> HTTPoison.post!(body, [])
+    |> webhook_client().post!(issue, [])
   end
 
   defp delay_to_send_issue, do: Application.get_env(:git_issues, :github)[:delay]
 
   defp webhook_url, do: Application.get_env(:git_issues, :github)[:webhook_url]
+
+  defp webhook_client,
+    do: Application.get_env(:git_issues, :github)[:webhook_client] |> IO.inspect()
 end
