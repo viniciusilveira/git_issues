@@ -18,6 +18,14 @@ defmodule GitIssues.GetIssues do
       iex> GitIssues.GetIssues.call("elixir-lang", "elixir")
       {:ok, %{user: "elixir-lang", repository: "elixir", issues: [{"Fix bug in jaro_distance implementation", "josevalim", []}, ...], contributors: {"josevalim", "José Valim", "400"}, ...]}}
   """
+  @spec call(String.t(), String.t()) ::
+          {:ok,
+           %{
+             user: String.t(),
+             repository: String.t(),
+             issues: list(Issues.t()),
+             contributors: list(Contributors.t())
+           }}
   def call(username, repo) do
     fetch_issues_task = Task.async(fn -> Issues.get(username, repo) end)
     fetch_contributors_task = Task.async(fn -> Contributors.get(username, repo) end)

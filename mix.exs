@@ -43,7 +43,8 @@ defmodule GitIssues.MixProject do
       {:bandit, "~> 1.2"},
       {:httpoison, "~> 2.0"},
       {:quantum, "~> 3.0"},
-      {:elixir_uuid, "~> 1.2"}
+      {:elixir_uuid, "~> 1.2"},
+      {:dialyxir, "~> 1.0", only: [:dev, :test], runtime: false}
     ]
   end
 

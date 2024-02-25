@@ -5,6 +5,8 @@ defmodule GitIssues.Contributors do
 
   require Logger
 
+  @type t :: %{username: String.t(), contributions: String.t()}
+
   @doc """
   Get a list of contributors for a given repository.
 
@@ -13,8 +15,9 @@ defmodule GitIssues.Contributors do
       iex> GitIssues.Contributors.get("elixir-lang", "elixir")
       {:ok, []}
   """
+
   @spec get(String.t(), String.t()) ::
-          {:ok, list({String.t(), String.t(), String.t()})} | {:error, String.t()}
+          {:ok, list(t())} | {:error, String.t()}
   def get(username, repo) do
     Logger.info("Fetching contributors for #{username}/#{repo}")
 

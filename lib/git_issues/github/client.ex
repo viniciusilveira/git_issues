@@ -1,6 +1,6 @@
 defmodule GitIssues.Github.Client do
   @moduledoc """
-  Serviço responsável pela comunicação com API do  github
+  This module is responsible for making requests to the Github API.
   """
   use GitIssues.Services, :behaviour
 

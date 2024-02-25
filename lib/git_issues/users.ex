@@ -4,12 +4,12 @@ defmodule GitIssues.Users do
   """
 
   @doc """
-  Get a list of users for a given repository.
+  Get full name from a user.
 
   ## Examples
 
       iex> GitIssues.Users.get("elixir-lang", "elixir")
-      {:ok, []}
+      {:ok, "Jose Valim"}
   """
   @spec get(String.t()) ::
           {:ok, String.t()} | {:error, String.t()}
