@@ -1,6 +1,6 @@
 defmodule GitIssues.Github.WebhookClient do
   @moduledoc """
-  Serviço responsável pela comunicação com API do  github
+  A client for a custom Webhook API.
   """
   use GitIssues.Services, :behaviour
 

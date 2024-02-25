@@ -1,6 +1,6 @@
 defmodule GitIssues.SendIssuesToWebhook do
   @moduledoc """
-  This module is responsible for sending issues storaged in ETS to a webhook 24 hours after collect.
+  This module is responsible for sending issues storaged in ETS to a webhook X hours after collect.
   """
 
   require Logger
@@ -13,8 +13,9 @@ defmodule GitIssues.SendIssuesToWebhook do
       iex> GitIssues.SendIssuesToWebhook.call()
       :ok
   """
+  @spec call() :: :ok
   def call do
-    IO.puts("Sending issues to webhook")
+    Logger.info("Sending issues to webhook")
 
     :issues
     |> :ets.tab2list()
@@ -30,7 +31,7 @@ defmodule GitIssues.SendIssuesToWebhook do
   end
 
   defp send_issue(issue) do
-    IO.puts("Sending issue to webhook ")
+    Logger.info("Sending issue to webhook ")
 
     webhook_url()
     |> webhook_client().post!(issue, [])
@@ -40,6 +41,5 @@ defmodule GitIssues.SendIssuesToWebhook do
 
   defp webhook_url, do: Application.get_env(:git_issues, :github)[:webhook_url]
 
-  defp webhook_client,
-    do: Application.get_env(:git_issues, :github)[:webhook_client] |> IO.inspect()
+  defp webhook_client, do: Application.get_env(:git_issues, :github)[:webhook_client]
 end

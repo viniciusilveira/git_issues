@@ -5,6 +5,8 @@ defmodule GitIssues.Issues do
 
   require Logger
 
+  @type t :: %{title: String.t(), username: String.t(), labels: list(String.t())}
+
   @doc """
   Get a list of issues for a given repository.
 
@@ -13,8 +15,10 @@ defmodule GitIssues.Issues do
       iex> GitIssues.Issues.get("elixir-lang", "elixir")
       {:ok, []}
   """
+
   @spec get(String.t(), String.t()) ::
-          {:ok, list({String.t(), String.t(), String.t()})} | {:error, String.t()}
+          {:ok, list(t())}
+          | {:error, String.t()}
   def get(username, repo) do
     Logger.info("Fetching issues for #{username}/#{repo}")
 
